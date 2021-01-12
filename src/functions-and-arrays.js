@@ -11,7 +11,6 @@ function maxOfTwoNumbers(num1, num2){
 
 // Iteration #2: Find longest word
 
-
 function findLongestWord(arr){
   let longestWord = [];
   if(arr.length === 0){
@@ -41,11 +40,12 @@ function findLongestWord(arr){
 
 const numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
 
-let sum = 0;
+
 
 let sumArray = []
 
 function sumNumbers(arr){
+  let sum = 0;
   if(arr.length === 1){
     return arr[0]
   }
@@ -53,7 +53,31 @@ function sumNumbers(arr){
     sum += arr[i]
   }
   return sum
+};
+
+//Bonus
+
+function sum(arr){
+  let count = 0;
+  for(let i = 0; i < arr.length; i++){
+    if(typeof arr[i] == 'number'){
+      count += arr[i]
+    }
+    else if(typeof arr[i] == 'string'){
+      count += arr[i].length;
+    }
+    else if(typeof arr[i] == 'boolean') {
+        if(arr[i] == true){
+          count++
+        }
+    }
+    else {
+      throw new Error("Unsupported data type sir or ma'am");
+   }
+  }
+   return count;
 }
+
 
 // Iteration #4: Calculate the average
 // Level 1: Array of numbers
@@ -85,6 +109,35 @@ function averageWordLength(arr){
     sum += arr[i].length;
   }
   return sum / arr.length;
+}
+
+// BONUS 4.1
+const mixedArr = [6, 12, 'miami', 1, true, 'barca', '200', 'lisboa', 8, 10];
+
+
+function avg(arr){
+  if(arr.length === 0){
+    return null;
+  }
+
+  let count = 0;
+  for(let i = 0; i < arr.length; i++){
+    if(typeof arr[i] == 'number'){
+      count += arr[i]
+    }
+    else if(typeof arr[i] == 'string'){
+      count += arr[i].length;
+    }
+    else if(typeof arr[i] == 'boolean') {
+        if(arr[i] == true){
+          count++
+        }
+    }
+    else {
+      throw new Error("Unsupported data type sir or ma'am");
+   }
+  }
+   return (Math.round((count / arr.length)*100)/100)
 }
 
 
@@ -187,3 +240,30 @@ const matrix = [
   [20, 73, 35, 29, 78, 31, 90, 1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 5, 54],
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
+
+function greatestProduct(matrix){
+  let count = 1;
+  let secondCount = 1;
+  let verticalCount = 1;
+  let secondVerticalCount = 1;
+  for(let i=0; i<matrix.length;i++){
+    let indx = 0;
+    verticalCount *= matrix[i][indx]
+    for(let j=0; j<matrix[i].length;j++){
+      secondCount *= matrix[i][j];
+      if(secondCount > count){
+        count = secondCount;
+        secondCount = 1;
+      }
+      indx++
+    }
+    if(secondVerticalCount > verticalCount){
+      verticalCount = secondCount;
+      secondVerticalCount = 1;
+    }
+  if(verticalCount > count){
+    return verticalCount;
+  }
+  return count;
+}
+}
